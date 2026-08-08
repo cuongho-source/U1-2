@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global English Mastery: Grade 6 Semester I Review Suite</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #475569;
+            --bg-main: #f1f5f9;
+            --card-bg: #ffffff;
+            --accent-green: #10b981;
+            --accent-red: #ef4444;
+            --border-color: #cbd5e1;
+            --text-dark: #0f172a;
+            --highlight-bg: #eff6ff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-dark);
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1150px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: white;
+            padding: 24px 30px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        header h1 {
+            font-size: 1.75rem;
+            margin-bottom: 4px;
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        .btn {
+            background-color: white;
+            color: var(--primary);
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+            font-size: 0.95rem;
+        }
+
+        .btn:hover {
+            background-color: #f8fafc;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.12);
+        }
+
+        .btn-submit {
+            background-color: var(--accent-green);
+            color: white;
+            font-size: 1.05rem;
+            padding: 12px 24px;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .btn-submit:hover {
+            background-color: #059669;
+            color: white;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: 2.2fr 1fr;
+            gap: 24px;
+        }
+
+        @media (max-width: 850px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            color: #1e3a8a;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+            margin-bottom: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .sidebar {
+            position: sticky;
+            top: 20px;
+            height: fit-content;
+        }
+
+        .timer-box {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--accent-red);
+            text-align: center;
+            padding: 12px;
+            background: #fef2f2;
+            border-radius: 8px;
+            border: 1px solid #fecaca;
+            margin-bottom: 16px;
+            letter-spacing: 1px;
+        }
+
+        .bank-container {
+            background-color: #f8fafc;
+            border: 2px dashed #cbd5e1;
+            padding: 14px;
+            border-radius: 8px;
+            margin-bottom: 18px;
+            min-height: 54px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .draggable {
+            background-color: #ffffff;
+            border: 1.5px solid var(--primary);
+            color: var(--primary-dark);
+            padding: 6px 14px;
+            border-radius: 6px;
+            cursor: grab;
+            user-select: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            box-shadow: 0 2px 4px rgba(37,99,235,0.1);
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+
+        .draggable:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px rgba(37,99,235,0.15);
+        }
+
+        .draggable:active {
+            cursor: grabbing;
+        }
+
+        .drop-zone {
+            display: inline-block;
+            min-width: 140px;
+            height: 36px;
+            border: 2px dashed var(--primary);
+            border-radius: 6px;
+            vertical-align: middle;
+            margin: 0 4px;
+            padding: 2px 10px;
+            background-color: var(--highlight-bg);
+            text-align: center;
+            line-height: 28px;
+            font-weight: 600;
+            color: #1e40af;
+            transition: background-color 0.2s, border-color 0.2s;
+        }
+
+        .question-item {
+            margin-bottom: 18px;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 550px) {
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .option-btn {
+            background: #f8fafc;
+            border: 1.5px solid var(--border-color);
+            padding: 10px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            text-align: left;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+
+        .option-btn:hover {
+            background: #e2e8f0;
+            border-color: #94a3b8;
+        }
+
+        .option-btn.selected {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary-dark);
+        }
+
+        .feedback-box {
+            display: none;
+            background-color: #fef2f2;
+            border-left: 4px solid var(--accent-red);
+            padding: 10px 14px;
+            margin-top: 8px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            color: #991b1b;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(4px);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            max-width: 750px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.2);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        #certificateSvg {
+            width: 100%;
+            height: auto;
+            margin-top: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .history-list {
+            list-style: none;
+            font-size: 0.9rem;
+        }
+
+        .history-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .audio-player-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .audio-player-box button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .badge {
+            background: #e0e7ff;
+            color: #3730a3;
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <div>
+                <h1>Global English Mastery</h1>
+                <p>Grade 6 Semester I Review Suite (English 6 Global Success - Units 1-2)</p>
+            </div>
+            <div>
+                <button class="btn" onclick="exportApp()">📦 Download Full Exam Suite (.html)</button>
+            </div>
+        </header>
+
+        <div class="dashboard">
+            <div class="main-content">
+                
+                <div class="card">
+                    <div class="card-title">
+                        <span>Module 1: Listening (Drag & Drop)</span>
+                        <span class="badge">5 Questions</span>
+                    </div>
+                    <p style="margin-bottom: 12px; font-size: 0.95rem; color: var(--secondary);">
+                        Listen to the conversation between two friends and drag the correct phrase into each blank space.
+                    </p>
+                    
+                    <div class="audio-player-box">
+                        <button onclick="simulateAudio()">🔊 Play Recording</button>
+                        <span style="font-size: 0.85rem; color: #64748b;" id="audioStatus">Click to play synthesized audio</span>
+                    </div>
+
+                    <div class="bank-container" id="bank-m1">
+                        <div class="draggable" draggable="true">new secondary school</div>
+                        <div class="draggable" draggable="true">art club</div>
+                        <div class="draggable" draggable="true">old friends</div>
+                        <div class="draggable" draggable="true">homework</div>
+                        <div class="draggable" draggable="true">happy</div>
+                    </div>
+
+                    <div class="question-item">
+                        1. Mark and Amy are excited about their <span class="drop-zone" data-ans="new secondary school"></span>.
+                        <div class="feedback-box" id="fb-m1-1"></div>
+                    </div>
+                    <div class="question-item">
+                        2. Amy wants to join the <span class="drop-zone" data-ans="art club"></span>.
+                        <div class="feedback-box" id="fb-m1-2"></div>
+                    </div>
+                    <div class="question-item">
+                        3. Mark wants to meet <span class="drop-zone" data-ans="old friends"></span> in secondary school.
+                        <div class="feedback-box" id="fb-m1-3"></div>
+                    </div>
+                    <div class="question-item">
+                        4. Mark is worried about having a lot of <span class="drop-zone" data-ans="homework"></span>.
+                        <div class="feedback-box" id="fb-m1-4"></div>
+                    </div>
+                    <div class="question-item">
+                        5. Amy feels <span class="drop-zone" data-ans="happy"></span> to have Mark studying in the same secondary school.
+                        <div class="feedback-box" id="fb-m1-5"></div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">
+                        <span>Module 2: Language - Pronunciation (Drag & Drop)</span>
+                        <span class="badge">2 Questions</span>
+                    </div>
+                    <p style="margin-bottom: 12px; font-size: 0.95rem; color: var(--secondary);">
+                        Drag the odd word out whose underlined sound differs from the other three into the box.
+                    </p>
+
+                    <div class="bank-container" id="bank-m2">
+                        <div class="draggable" draggable="true">cross</div>
+                        <div class="draggable" draggable="true">books</div>
+                    </div>
+
+                    <div class="question-item">
+                        1. Which word differs in the sound of the underlined vowel? (A. l<u>o</u>ve, B. w<u>o</u>nder, C. c<u>o</u>mpass, D. cr<u>o</u>ss)
+                        <br>Answer: <span class="drop-zone" data-ans="cross"></span>
+                        <div class="feedback-box" id="fb-m2-1"></div>
+                    </div>
+                    <div class="question-item">
+                        2. Which word differs in ending pronunciation? (A. noisy, B. student, C. books, D. postcard)
+                        <br>Answer: <span class="drop-zone" data-ans="books"></span>
+                        <div class="feedback-box" id="fb-m2-2"></div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">
+                        <span>Module 3: Language - Gap Fill (Drag & Drop)</span>
+                        <span class="badge">4 Questions</span>
+                    </div>
+                    <p style="margin-bottom: 12px; font-size: 0.95rem; color: var(--secondary);">
+                        Drag the correct option from the word bank into each sentence gap.
+                    </p>
+
+                    <div class="bank-container" id="bank-m3">
+                        <div class="draggable" draggable="true">homework</div>
+                        <div class="draggable" draggable="true">calculator</div>
+                        <div class="draggable" draggable="true">on</div>
+                        <div class="draggable" draggable="true">her father's</div>
+                    </div>
+
+                    <div class="question-item">
+                        1. I have a lot of <span class="drop-zone" data-ans="homework"></span> to do tonight before I can relax and watch my favourite TV show.
+                        <div class="feedback-box" id="fb-m3-1"></div>
+                    </div>
+                    <div class="question-item">
+                        2. I am doing my maths homework. Can I borrow your <span class="drop-zone" data-ans="calculator"></span>?
+                        <div class="feedback-box" id="fb-m3-2"></div>
+                    </div>
+                    <div class="question-item">
+                        3. My father is hanging our family photo <span class="drop-zone" data-ans="on"></span> the wall.
+                        <div class="feedback-box" id="fb-m3-3"></div>
+                    </div>
+                    <div class="question-item">
+                        4. She is excited to ride in <span class="drop-zone" data-ans="her father's"></span> new car.
+                        <div class="feedback-box" id="fb-m3-4"></div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">
+                        <span>Module 4: Language - Grammar Error Correction</span>
+                        <span class="badge">4 Questions</span>
+                    </div>
+                    <p style="margin-bottom: 12px; font-size: 0.95rem; color: var(--secondary);">
+                        Choose the option (A, B, C, or D) that represents the incorrect underlined word/phrase.
+                    </p>
+
+                    <div class="question-item">
+                        <p>1. The apples <u>are</u> (A) not in the basket. They <u>are</u> (B) <u>in</u> (C) <u>the</u> (D) table.</p>
+                        <div class="options-grid" data-m4-q="1" data-correct="in" data-explanation="Correct answer: 'in' -> 'on'. We use 'on the table' to indicate something placed on top of a surface.">
+                            <button class="option-btn" onclick="selectOption(this)">A. are</button>
+                            <button class="option-btn" onclick="selectOption(this)">B. They</button>
+                            <button class="option-btn" onclick="selectOption(this)">C. in</button>
+                            <button class="option-btn" onclick="selectOption(this)">D. the</button>
+                        </div>
+                        <div class="feedback-box" id="fb-m4-1"></div>
+                    </div>
+
+                    <div class="question-item">
+                        <p>2. <u>Does</u> (A) she <u>cycles</u> (B) <u>to</u> (C) school <u>every</u> (D) afternoon?</p>
+                        <div class="options-grid" data-m4-q="2" data-correct="cycles" data-explanation="Correct answer: 'cycles' -> 'cycle'. In Present Simple questions with auxiliary verb 'Does', the main verb must be in base form.">
+                            <button class="option-btn" onclick="selectOption(this)">A. Does</button>
+                            <button class="option-btn" onclick="selectOption(this)">B. cycles</button>
+                            <button class="option-btn" onclick="selectOption(this)">C. to</button>
+                            <button class="option-btn" onclick="selectOption(this)">D. every</button>
+                        </div>
+                        <div class="feedback-box" id="fb-m4-2"></div>
+                    </div>
+
+                    <div class="question-item">
+                        <p>3. Basketball is my <u>sister's</u> (A) favourite sport. She <u>like</u> (B) <u>playing</u> (C) it <u>in</u> (D) her free time.</p>
+                        <div class="options-grid" data-m4-q="3" data-correct="like" data-explanation="Correct answer: 'like' -> 'likes'. The subject 'She' is 3rd-person singular, so the verb requires '-s' in Present Simple.">
+                            <button class="option-btn" onclick="selectOption(this)">A. sister's</button>
+                            <button class="option-btn" onclick="selectOption(this)">B. like</button>
+                            <button class="option-btn" onclick="selectOption(this)">C. playing</button>
+                            <button class="option-btn" onclick="selectOption(this)">D. in</button>
+                        </div>
+                        <div class="feedback-box" id="fb-m4-3"></div>
+                    </div>
+
+                    <div class="question-item">
+                        <p>4. Peter is <u>talking</u> (A) <u>to</u> (B) a <u>beautiful young</u> (C) girl over there. She's a friend of <u>Mai</u> (D).</p>
+                        <div class="options-grid" data-m4-q="4" data-correct="Mai" data-explanation="Correct answer: 'Mai' -> 'Mai's'. The phrase 'a friend of...' requires a possessive noun ('a friend of Mai's').">
+                            <button class="option-btn" onclick="selectOption(this)">A. talking</button>
+                            <button class="option-btn" onclick="selectOption(this)">B. to</button>
+                            <button class="option-btn" onclick="selectOption(this)">C. beautiful young</button>
+                            <button class="option-btn" onclick="selectOption(this)">D. Mai</button>
+                        </div>
+                        <div class="feedback-box" id="fb-m4-4"></div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">
+                        <span>Module 5: Reading Passage - Gap Fill (Drag & Drop)</span>
+                        <span class="badge">5 Blanks</span>
+                    </div>
+                    <p style="margin-bottom: 12px; font-size: 0.95rem; color: var(--secondary);">
+                        Complete the reading passage by dragging suitable words or phrases into the blanks.
+                    </p>
+
+                    <div class="bank-container" id="bank-m5">
+                        <div class="draggable" draggable="true">flat</div>
+                        <div class="draggable" draggable="true">dishwasher</div>
+                        <div class="draggable" draggable="true">bathroom</div>
+                        <div class="draggable" draggable="true">In front of</div>
+                        <div class="draggable" draggable="true">chests of drawer</div>
+                        <div class="draggable" draggable="true">washing machine</div>
+                    </div>
+
+                    <div style="line-height: 2.2; font-size: 1rem; background: #fafafa; padding: 18px; border-radius: 8px; border: 1px solid #e2e8f0;">
+                        Our family has just moved to Hanoi. We live in a cozy <span class="drop-zone" data-ans="flat"></span> (1) in Ba Dinh district. There are five rooms in our house: one living room, one kitchen, one bathroom and two bedrooms. The kitchen is equipped with a handy <span class="drop-zone" data-ans="dishwasher"></span> (2) that makes cleaning up really easy. The <span class="drop-zone" data-ans="bathroom"></span> (3) is right next to the kitchen, complete with a refreshing shower and a sparkling mirror. <span class="drop-zone" data-ans="In front of"></span> (4) the living room, there's a large window that fills the space with natural light. I have two big <span class="drop-zone" data-ans="chests of drawer"></span> (5) in my bedroom, and they are perfect for storing my clothes and school stuff. Overall, my house is comfortable and modern.
+                    </div>
+                    
+                    <div style="margin-top: 15px;">
+                        <div class="feedback-box" id="fb-m5-1"></div>
+                        <div class="feedback-box" id="fb-m5-2"></div>
+                        <div class="feedback-box" id="fb-m5-3"></div>
+                        <div class="feedback-box" id="fb-m5-4"></div>
+                        <div class="feedback-box" id="fb-m5-5"></div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="sidebar">
+                <div class="card">
+                    <div class="card-title">Exam Analytics</div>
+                    <div style="font-size: 0.85rem; color: var(--secondary); margin-bottom: 6px; font-weight: 600;">TIME REMAINING</div>
+                    <div class="timer-box" id="timer">15:00</div>
+                    
+                    <div class="card-title" style="margin-top: 20px;">Student Registration</div>
+                    <label style="display: block; font-size: 0.85rem; margin-bottom: 6px; font-weight: 600;">Full Name:</label>
+                    <input type="text" id="studentName" placeholder="Enter student full name..." style="width: 100%; padding: 10px 12px; border: 1px solid var(--border-color); border-radius: 6px; margin-bottom: 18px; font-size: 0.95rem;">
+                    
+                    <button class="btn btn-submit" onclick="submitExam()">
+                        Submit Assessment
+                    </button>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">High Scores (LocalStorage)</div>
+                    <ul class="history-list" id="historyList"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="certModal">
+        <div class="modal-content">
+            <h2 style="color: #1e3a8a; font-size: 1.6rem;">Assessment Complete!</h2>
+            <p id="finalScoreText" style="margin: 14px 0; font-size: 1.15rem; color: var(--text-dark);"></p>
+            
+            <div id="svgContainer"></div>
+
+            <div style="margin-top: 20px; display: flex; justify-content: center; gap: 12px;">
+                <button class="btn" style="background-color: var(--secondary); color: white;" onclick="closeModal()">Review Corrections</button>
+                <button class="btn" style="background-color: var(--primary); color: white;" onclick="window.print()">🖨️ Print Certificate</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Timer
+        let timeLeft = 15 * 60;
+        const timerElement = document.getElementById('timer');
+        
+        const countdown = setInterval(() => {
+            if (timeLeft <= 0) {
+                clearInterval(countdown);
+                submitExam();
+            } else {
+                timeLeft--;
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            }
+        }, 1000);
+
+        // Drag & Drop
+        let draggedItem = null;
+
+        function initDragEvents() {
+            document.querySelectorAll('.draggable').forEach(item => {
+                item.addEventListener('dragstart', (e) => {
+                    draggedItem = e.target;
+                    e.dataTransfer.setData('text/plain', e.target.innerText);
+                });
+            });
+        }
+        initDragEvents();
+
+        document.querySelectorAll('.drop-zone').forEach(zone => {
+            zone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                zone.style.backgroundColor = '#dbeafe';
+            });
+
+            zone.addEventListener('dragleave', () => {
+                zone.style.backgroundColor = 'var(--highlight-bg)';
+            });
+
+            zone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                zone.style.backgroundColor = 'var(--highlight-bg)';
+                if (draggedItem) {
+                    if (zone.innerText.trim() !== '') {
+                        const existingText = zone.innerText.trim();
+                        const parentBank = draggedItem.parentElement;
+                        const newElem = document.createElement('div');
+                        newElem.className = 'draggable';
+                        newElem.draggable = true;
+                        newElem.innerText = existingText;
+                        parentBank.appendChild(newElem);
+                        initDragEvents();
+                    }
+                    zone.innerText = draggedItem.innerText;
+                    draggedItem.remove();
+                    draggedItem = null;
+                }
+            });
+        });
+
+        function selectOption(btn) {
+            const parent = btn.parentElement;
+            parent.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+        }
+
+        function simulateAudio() {
+            const status = document.getElementById('audioStatus');
+            if ('speechSynthesis' in window) {
+                status.textContent = "Audio playing...";
+                const synth = window.speechSynthesis;
+                synth.cancel();
+                const text = "Mark and Amy are excited about their new secondary school. Amy wants to join the art club. Mark wants to meet old friends in secondary school. Mark is worried about having a lot of homework. Amy feels happy to have Mark studying in the same secondary school.";
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.rate = 0.85;
+                utterance.onend = () => { status.textContent = "Playback completed."; };
+                synth.speak(utterance);
+            } else {
+                status.textContent = "Speech synthesis not supported.";
+            }
+        }
+
+        // Assessment Evaluation
+        function submitExam() {
+            clearInterval(countdown);
+            const studentName = document.getElementById('studentName').value.trim() || 'Student';
+            let totalPoints = 0;
+            const maxPoints = 20;
+
+            // Reset feedbacks
+            document.querySelectorAll('.feedback-box').forEach(fb => fb.style.display = 'none');
+
+            // Evaluate Drop Zones (Modules 1, 2, 3, 5)
+            let dzIdx = 0;
+            document.querySelectorAll('.drop-zone').forEach(zone => {
+                dzIdx++;
+                const userVal = zone.innerText.trim().toLowerCase();
+                const expectedVal = zone.getAttribute('data-ans').trim().toLowerCase();
+                
+                if (userVal === expectedVal && userVal !== '') {
+                    totalPoints++;
+                    zone.style.borderColor = 'var(--accent-green)';
+                    zone.style.backgroundColor = '#d1fae5';
+                    zone.style.color = '#065f46';
+                } else {
+                    zone.style.borderColor = 'var(--accent-red)';
+                    zone.style.backgroundColor = '#fee2e2';
+                    zone.style.color = '#991b1b';
+                    
+                    // Show explanation feedback if incorrect
+                    let fbElem = null;
+                    if (dzIdx <= 5) fbElem = document.getElementById(`fb-m1-${dzIdx}`);
+                    else if (dzIdx <= 7) fbElem = document.getElementById(`fb-m2-${dzIdx - 5}`);
+                    else if (dzIdx <= 11) fbElem = document.getElementById(`fb-m3-${dzIdx - 7}`);
+                    else fbElem = document.getElementById(`fb-m5-${dzIdx - 11}`);
+
+                    if (fbElem) {
+                        fbElem.innerHTML = `❌ <strong>Incorrect.</strong> Correct answer: <strong>${zone.getAttribute('data-ans')}</strong>`;
+                        fbElem.style.display = 'block';
+                    }
+                }
+            });
+
+            // Evaluate Module 4
+            document.querySelectorAll('.options-grid').forEach(grid => {
+                const qNum = grid.getAttribute('data-m4-q');
+                const selected = grid.querySelector('.option-btn.selected');
+                const correct = grid.getAttribute('data-correct').trim().toLowerCase();
+                const explanation = grid.getAttribute('data-explanation');
+                const fbElem = document.getElementById(`fb-m4-${qNum}`);
+
+                if (selected) {
+                    const text = (selected.innerText.split('. ')[1] || selected.innerText).trim().toLowerCase();
+                    if (text === correct) {
+                        totalPoints++;
+                        selected.style.background = 'var(--accent-green)';
+                        selected.style.color = 'white';
+                        selected.style.borderColor = 'var(--accent-green)';
+                    } else {
+                        selected.style.background = 'var(--accent-red)';
+                        selected.style.color = 'white';
+                        selected.style.borderColor = 'var(--accent-red)';
+                        if (fbElem) {
+                            fbElem.innerHTML = `❌ ${explanation}`;
+                            fbElem.style.display = 'block';
+                        }
+                    }
+                } else {
+                    if (fbElem) {
+                        fbElem.innerHTML = `❌ ${explanation}`;
+                        fbElem.style.display = 'block';
+                    }
+                }
+            });
+
+            const scorePercent = Math.round((totalPoints / maxPoints) * 100);
+
+            saveScore(studentName, scorePercent, totalPoints, maxPoints);
+            generateCertificate(studentName, scorePercent, totalPoints, maxPoints);
+
+            document.getElementById('finalScoreText').innerHTML = `<strong>${studentName}</strong>, your score is <strong>${totalPoints}/${maxPoints}</strong> (${scorePercent}%)`;
+            document.getElementById('certModal').style.display = 'flex';
+        }
+
+        // SVG Certificate
+        function generateCertificate(name, score, points, max) {
+            const svg = `
+                <svg id="certificateSvg" viewBox="0 0 800 550" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="15" y="15" width="770" height="520" rx="16" fill="#ffffff" stroke="#2563eb" stroke-width="8"/>
+                    <rect x="30" y="30" width="740" height="490" rx="12" fill="none" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="8 4"/>
+                    
+                    <circle cx="50" cy="50" r="10" fill="#2563eb"/>
+                    <circle cx="750" cy="50" r="10" fill="#2563eb"/>
+                    <circle cx="50" cy="500" r="10" fill="#2563eb"/>
+                    <circle cx="750" cy="500" r="10" fill="#2563eb"/>
+
+                    <text x="400" y="100" font-family="'Segoe UI', Arial" font-size="30" font-weight="bold" fill="#1e3a8a" text-anchor="middle" letter-spacing="2">CERTIFICATE OF ACHIEVEMENT</text>
+                    <text x="400" y="135" font-family="'Segoe UI', Arial" font-size="15" fill="#64748b" text-anchor="middle">GLOBAL ENGLISH MASTERY • GRADE 6 SEMESTER I REVIEW</text>
+                    
+                    <line x1="200" y1="155" x2="600" y2="155" stroke="#2563eb" stroke-width="2"/>
+
+                    <text x="400" y="200" font-family="'Segoe UI', Arial" font-size="16" fill="#475569" text-anchor="middle">This is proudly presented to</text>
+                    <text x="400" y="255" font-family="'Segoe UI', Arial" font-size="32" font-weight="bold" fill="#2563eb" text-anchor="middle">${name}</text>
+                    <line x1="250" y1="275" x2="550" y2="275" stroke="#94a3b8" stroke-width="1"/>
+
+                    <text x="400" y="320" font-family="'Segoe UI', Arial" font-size="16" fill="#475569" text-anchor="middle">for completing the assessment suite with an accuracy score of</text>
+                    
+                    <rect x="320" y="345" width="160" height="60" rx="10" fill="#f0fdf4" stroke="#10b981" stroke-width="2"/>
+                    <text x="400" y="388" font-family="'Segoe UI', Arial" font-size="34" font-weight="bold" fill="#10b981" text-anchor="middle">${score}%</text>
+
+                    <text x="400" y="435" font-family="'Segoe UI', Arial" font-size="14" fill="#64748b" text-anchor="middle">Score: ${points} / ${max} Questions Correct</text>
+
+                    <text x="150" y="480" font-family="'Segoe UI', Arial" font-size="13" fill="#94a3b8" text-anchor="middle">Date: ${new Date().toLocaleDateString()}</text>
+                    <text x="650" y="480" font-family="'Segoe UI', Arial" font-size="13" fill="#94a3b8" text-anchor="middle">English 6 Global Success</text>
+                </svg>
+            `;
+            document.getElementById('svgContainer').innerHTML = svg;
+        }
+
+        function closeModal() {
+            document.getElementById('certModal').style.display = 'none';
+        }
+
+        function saveScore(name, score, points, max) {
+            let history = JSON.parse(localStorage.getItem('gem_g6_scores') || '[]');
+            history.unshift({ name, score, points, max, date: new Date().toLocaleDateString() });
+            history = history.slice(0, 5);
+            localStorage.setItem('gem_g6_scores', JSON.stringify(history));
+            renderHistory();
+        }
+
+        function renderHistory() {
+            const history = JSON.parse(localStorage.getItem('gem_g6_scores') || '[]');
+            const list = document.getElementById('historyList');
+            if (history.length === 0) {
+                list.innerHTML = '<li style="color: var(--secondary); font-style: italic;">No previous attempts recorded</li>';
+                return;
+            }
+            list.innerHTML = history.map(item => `
+                <li>
+                    <div>
+                        <strong style="color: var(--text-dark);">${item.name}</strong>
+                        <div style="font-size: 0.75rem; color: #64748b;">${item.date} (${item.points}/${item.max})</div>
+                    </div>
+                    <span style="color: var(--primary); font-weight: bold; font-size: 1.05rem;">${item.score}%</span>
+                </li>
+            `).join('');
+        }
+
+        // Export Function
+        function exportApp() {
+            const htmlContent = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
+            const blob = new Blob([htmlContent], { type: "text/html" });
+            const a = document.createElement("a");
+            a.href = URL.createObjectURL(blob);
+            a.download = "Grade6_English_FinalReview.html";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+
+        renderHistory();
+    </script>
+</body>
+</html>
